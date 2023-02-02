@@ -41,7 +41,7 @@ def start(message):
     global tab
     bot.send_message(message.chat.id, "Hello! I'm andy_bot.\n"
                                       "Let's play tic-tac-toe game")
-    bot.send_message(message.chat.id, 'The /game started')
+    bot.send_message(message.chat.id, 'Press /game to start')
     bot.send_message(message.chat.id, f'{playfield(tab)}')
 
 
@@ -89,11 +89,6 @@ def set_symbol(message):
             player = 2
             if who_won(tab) == False:
                 number(message)
-            elif step_counter >= 9:
-                bot.send_message(message.chat.id, 'The game finished.\nDrawn game.')
-                tab = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                step_counter = 0
-                bot.send_message(message.chat.id, 'Press /start to try again')
             else:
                 bot.send_message(message.chat.id, 'The game finished')
                 winner = who_won(tab)
@@ -119,11 +114,6 @@ def set_symbol(message):
             player = 1
             if who_won(tab) == False:
                 number(message)
-            elif step_counter >= 9:
-                bot.send_message(message.chat.id, 'The game finished.\nDrawn game.')
-                tab = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-                step_counter = 0
-                bot.send_message(message.chat.id, 'Press /start to try again')
             else:
                 bot.send_message(message.chat.id, 'The game finished')
                 winner = who_won(tab)
@@ -132,15 +122,14 @@ def set_symbol(message):
                     tab = [1, 2, 3, 4, 5, 6, 7, 8, 9]
                     step_counter = 0
                     bot.send_message(message.chat.id, 'Press /start to try again')
-
                 elif winner == "O":
                     bot.send_message(message.chat.id, 'Player 2 won.')
                     tab = [1, 2, 3, 4, 5, 6, 7, 8, 9]
                     step_counter = 0
                     bot.send_message(message.chat.id, 'Press /start to try again')
-
         else:
             bot.send_message(message.chat.id, 'This cell is already occupied')
             number(message)
+
 
 bot.infinity_polling()
