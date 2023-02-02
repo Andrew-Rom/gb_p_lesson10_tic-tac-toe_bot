@@ -64,8 +64,14 @@ def number(message):
 
 @bot.message_handler(content_types=["text"])
 def select_position(message):
-    if message.text in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+    global step_counter
+    if message.text in ["1", "2", "3", "4", "5", "6", "7", "8", "9"] and step_counter < 8:
         set_symbol(message)
+    elif step_counter >= 8:
+        bot.send_message(message.chat.id, 'The game finished.\nDrawn game.')
+        tab = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        step_counter = 0
+        bot.send_message(message.chat.id, 'Press /start to try again')
     else:
         bot.send_message(message.chat.id, 'Please, click button')
         number(message)
